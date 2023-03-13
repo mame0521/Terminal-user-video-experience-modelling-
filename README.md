@@ -8,7 +8,7 @@
 
 ## 一. 问题描述（problem description）
 
-随着无线宽带网络的升级，以及智能终端的普及，越来越多的用户选择在移动智能终端上用应用客户端 APP 观看网络视频，这是一种基于TCP的视频传输及播放。看网络视频影响用户体验的两个关键指标是“初始缓冲等待时间”和在视频播放过程中的“卡顿缓冲时间”，我们可以用“初始缓冲时延”和“卡顿时长占比”（卡顿时长占比 = 卡顿时长/视频播放时长）来定量评价用户体验。
+随着无线宽带网络的升级，以及智能终端的普及，越来越多的用户选择在移动智能终端上用应用客户端 APP 观看网络视频，这是一种基于TCP（Transmission Control Protocol传输控制协议）的视频传输及播放。看网络视频影响用户体验的两个关键指标是“初始缓冲等待时间”和在视频播放过程中的“卡顿缓冲时间”，我们可以用“初始缓冲时延”和“卡顿时长占比”（卡顿时长占比 = 卡顿时长/视频播放时长）来定量评价用户体验。
 
 已有相关研究表明影响“初始缓冲时延”和“卡顿时长占比”的主要因素有“初始缓冲峰值速率”、“播放阶段平均下载速率”、“端到端环回时间（E2E RTT）”，以及视频参数。然而这些因素和“初始缓冲时延”和“卡顿时长占比”之间的内在准确关系并不明确。
 
@@ -32,6 +32,8 @@ According to the experimental data provided in the attachment, please establish 
 
 1. **初始缓冲时延**： 等于初始缓冲准备阶段的时延 + 初始缓冲下载阶段的时延（包含准备时延）。
 
+    **Initial buffer delay**: equal to the initial buffer preparation phase delay + the initial buffer download phase delay (including the preparation delay).
+
    在实时视频播放业务中，由于网络拥塞以及无线信道的信道容量变化，可能导致视频播放过程中出现中断，视频播放中断严重影响用户的观看体验，频繁的视频播放中断会导致用户最终中止播放过程。为了降低播放中断概率，通常先在播放前缓冲一段时间，叫做**初始缓冲时延**。在 初始缓冲时延期间，一般采取播放片头、或广告短片等方式，降低客户的等待感。典型的平均时延值为 4s 。
 
 2. **卡顿时长占比**，即播放过程重缓冲总时延/有效播放总时长，卡顿时长占比 = 卡顿时长 / 视频播放时长。
@@ -48,7 +50,7 @@ According to the experimental data provided in the attachment, please establish 
 
 
 
-5. **E2E RTT**(端到端环回时间), 是无线通信运业务网络架构确定的一个通信参数。
+5. **E2E RTT**(端到端环回时间), 端到端是建立在TCP（Transmission Control Protocol）之上的一种网络连接方式，属于传输层。在网络传输控制中，端到端环回时间是一个非常重要的参数，指的是终端到视频服务器的平均环回时延。
 
 <img src="https://gitee.com/flycloud2009_cloudlou/img/raw/master/img/202303131629996.png" alt="image-20230313162829676" style="zoom: 150%;" />
 
