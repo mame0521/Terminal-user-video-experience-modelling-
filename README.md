@@ -1,9 +1,9 @@
-# End user video experience modelling
+# Modelling Terminal Customer's Video Experience based on Network Side Estimation
+
 # 网络侧估计终端用户视频体验建模
 
 
-## Question A: Network side estimation end-user video experience modeling
-
+## Question A: Network side estimation for terminal customer's video experience modeling
 
 
 ## 一. 问题描述（problem description）
