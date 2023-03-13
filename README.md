@@ -1,3 +1,5 @@
+
+
 # Modelling Terminal Customer's Video Experience based on Network Side Estimation
 
 # 网络侧估计终端用户视频体验建模
@@ -16,9 +18,11 @@
 
 
 
-With the upgrade of wireless broadband network and the popularity of intelligent terminal, more and more users choose to watch network video on mobile intelligent terminal with application client APP, which is a kind of video transmission and playback based on TCP. Two key indicators that affect user experience when watching network videos are "initial buffer waiting time" and "stuck buffer time" during video playback. We can use "initial buffer delay" and "stuck duration ratio" (stuck duration ratio = stuck duration/video playback duration) to evaluate user experience quantitatively.
-Relevant studies have shown that the main factors affecting "initial buffer delay" and "instant duration ratio" include "initial peak buffer rate", "average download rate during playback phase", "end-to-end loopback time (E2E RTT)", and video parameters. However, the exact internal relationship between these factors and "initial buffer delay" and "timeout duration ratio" is not clear.
-According to the experimental data provided in the attachment, please establish the functional relationship between the user experience evaluation variables (initial buffering delay, instant duration ratio) and the network variables (initial buffering peak rate, average download rate during playback phase, E2E RTT).
+With the upgrade of wireless broadband networks and the popularity of smart terminals, more and more users are choosing to watch online videos on mobile smart terminals using application client apps. This is a video transmission and playback based on TCP (Transmission Control Protocol). The two key indicators that affect the user experience of watching online videos are "initial buffering waiting time" and "stalling buffering time" during video playback. We can use "initial buffering delay" and "stalling duration ratio" (stalling duration ratio = stalling duration / video playback time) to quantitatively evaluate user experience.
+
+Previous studies have shown that the main factors that affect "initial buffering delay" and "stalling duration ratio" are "initial buffering peak rate", "average download rate during playback stage", "end-to-end round-trip time (E2E RTT)", and video parameters. However, the inherent accurate relationship between these factors and "initial buffering delay" and "stalling duration ratio" is not clear.
+
+Please establish a functional relationship between the user experience evaluation variables (initial buffering delay, stalling duration ratio) and network-side variables (initial buffering peak rate, average download rate during playback stage, E2E RTT) based on the experimental data provided in the attachment.
 
 
 
@@ -32,15 +36,15 @@ According to the experimental data provided in the attachment, please establish 
 
 1. **初始缓冲时延**： 等于初始缓冲准备阶段的时延 + 初始缓冲下载阶段的时延（包含准备时延）。
 
-    **Initial buffer delay**: equal to the initial buffer preparation phase delay + the initial buffer download phase delay (including the preparation delay).
+   **Initial buffer delay**: equal to the initial buffer preparation phase delay + the initial buffer download phase delay (including the preparation delay).
 
    在实时视频播放业务中，由于网络拥塞以及无线信道的信道容量变化，可能导致视频播放过程中出现中断，视频播放中断严重影响用户的观看体验，频繁的视频播放中断会导致用户最终中止播放过程。为了降低播放中断概率，通常先在播放前缓冲一段时间，叫做**初始缓冲时延**。在 初始缓冲时延期间，一般采取播放片头、或广告短片等方式，降低客户的等待感。典型的平均时延值为 4s 。
 
-2. **卡顿时长占比**，即播放过程重缓冲总时延/有效播放总时长，卡顿时长占比 = 卡顿时长 / 视频播放时长。
+2. **卡顿时长占比**(stalling duration ratio)，即播放过程重缓冲总时延/有效播放总时长，卡顿时长占比 = 卡顿时长 / 视频播放时长。
 
-3. **初始缓冲峰值速率**(kbps) ，是视频初始缓冲阶段达到的最大瞬时速率，和缓存数据量、E2E RTT(ms)，以及当时当地无线线路能力、无限负载强相关，是初始缓冲时延的最为关键的决定因素之一。
+3. **初始缓冲峰值速率**(initial buffering peak rate)  (kbps) ，是视频初始缓冲阶段达到的最大瞬时速率，和缓存数据量、E2E RTT(ms)，以及当时当地无线线路能力、无限负载强相关，是初始缓冲时延的最为关键的决定因素之一。
 
-4. **播放阶段平均下载速率**，即播放期间感知速率，播放阶段下行总流量/(停止播放的时间戳-首次开始播放的时间戳)。
+4. **播放阶段平均下载速率**(average download rate during playback stage)，即播放期间感知速率，播放阶段下行总流量/(停止播放的时间戳-首次开始播放的时间戳)。
 
    
 
@@ -54,23 +58,12 @@ According to the experimental data provided in the attachment, please establish 
 
 <img src="https://gitee.com/flycloud2009_cloudlou/img/raw/master/img/202303131629996.png" alt="image-20230313162829676" style="zoom: 150%;" />
 
-                                 移动视频业务E2E 组网示意图 （简单了解一下，无须深入）
-
-
-
-
+                     移动视频业务E2E 组网示意图 （简单了解一下，无须深入）
 
 6. **vMOS** 
 
    主观测试评价标准，MOS（Mean Opinion Score，或者Mean conversation-Opinion Score）叫做 平均会话评价分，是视频和语音质量主观测试的一种评价标准。它是一种五分制判断标尺，可以用数字或者文字表达。
-
-   Excellent（优）＝5
-   Good（良）      ＝4
-   Fair（中）         ＝3
-   Poor（差）       ＝2
-   Bad（劣）         ＝1
-
-   
+   Excellent（优）＝5,   Good（良）＝4,  Fair（中）＝3,  Poor（差）＝2,  Bad（劣）＝1
 
    vMOS 是视频节目的主观测试评价标准，用来评估用户观看视频的质量，即用户体验评价变量。综合考虑视频源质量、播放过程中的初始时延。卡顿占比、视频播放时长，来对整个视频体验进行MOS打分。vMOS由sQuality（片源质量）、sLoading（初始缓冲时长）、和sStalling（卡顿）三项分值决定。
 
@@ -94,13 +87,13 @@ According to the experimental data provided in the attachment, please establish 
 我们首先分析影响初始缓冲时延的因素，建立起这些相互影响因素的网络结构图。
 其次我们利用题目所给数据，建立初始化缓冲时延与初始缓冲峰值速率，播放阶段平均下载速率，E2E RTT之间的函数关系。我们采取统计回归来拟合方法，分析这些变量对用户 体验评价变量的影响，分别建立相关函数模型。最后利用建立好的模型来估测初始缓冲时延与卡顿占比之间的关系，进行残差分析，验证模型的正确性。
 
-This problem is about solving the functional relationship between user experience evaluation variables (initial buffer delay, instant duration ratio) and network variables (initial buffer peak rate, average download rate during playback phase, E2E RTT).
-
-Firstly, we analyze the factors that affect the initial buffer delay and establish the network structure diagram of these factors.
-
-Secondly, we use the data given in the title to establish the functional relationship between the initial buffer delay and the initial buffer peak rate, the average download rate in the playback phase, E2E RTT. We adopted statistical regression to fit the method, analyzed the influence of these variables on the user experience evaluation variables, and established correlation function models respectively. Finally, the established model is used to estimate the relationship between the initial buffer delay and the deadweight ratio, and the residual analysis is carried out to verify the correctness of the model.
 
 
+The question is about solving the functional relationship between user experience evaluation variables (initial buffer delay, stalling duration ratio) and network-side variables (initial buffer peak rate, average download rate during playback, E2E RTT).
+
+Firstly, we analyze the factors that affect the initial buffer delay and establish a network structure diagram of these interrelated factors.
+
+Secondly, we use the data provided in the question to establish the functional relationship between the initial buffer delay and the initial buffer peak rate, average download rate during playback, and E2E RTT. We adopt statistical regression fitting method to analyze the impact of these variables on user experience evaluation variables, and establish relevant functional models respectively. Finally, we use the established models to estimate the relationship between initial buffer delay and stalling duration ratio, conduct residual analysis, and verify the correctness of the model.
 
 
 
@@ -203,7 +196,7 @@ Secondly, we use the data given in the title to establish the functional relatio
 ![image-20230313154759921](https://gitee.com/flycloud2009_cloudlou/img/raw/master/img/202303131601925.png)
 
 
-通过 多次拟合，发现 卡段占比 z和 初始化缓存时延 y的相关性系数 R2=0.0736，说明卡顿占比 与初始缓冲时延具有交互性，其线性关系明显， 得到关系：
+通过多次拟合，发现卡段占比 z和 初始化缓存时延Y的相关性系数 R2=0.0736，说明卡顿占比与初始缓冲时延具有交互性，其线性关系明显， 得到关系：
 
  ![image-20230313155050268](https://gitee.com/flycloud2009_cloudlou/img/raw/master/img/202303131600410.png)
 
@@ -221,11 +214,11 @@ Secondly, we use the data given in the title to establish the functional relatio
 
  通过以上研究，我们得到以下三个结论：
 
-1.  在视频播放之前进行缓冲，能够降低播放中断概率。
+1. 在视频播放之前进行缓冲，能够降低播放中断概率。
 
 2. 视频播放中断的原因是视频分组不能及时有效的到达接收端进行解码，导致接收端播放队列为空。
 
-3.  初始缓冲时延能够减少播放中断，但是过大的初始缓冲时延也会影响用户的观看体验。
+3. 初始缓冲时延能够减少播放中断，但是过大的初始缓冲时延也会影响用户的观看体验。
 
    因此, 初始缓冲时延是衡量视频传输服务质量的重要指标，初始缓冲时延能够减少播放卡顿中断，但是过大的初始缓冲时延也会影响用户的观看体验。此外，初始缓冲峰值速率的大小，直接影响到初始缓冲时延。
 
